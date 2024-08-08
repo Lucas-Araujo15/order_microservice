@@ -6,6 +6,7 @@ import br.com.alurafood.orders.service.OrderService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,6 +30,11 @@ public class OrderController {
         OrderDTO dto = service.findById(id);
 
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/port")
+    public String getPort(@Value("${local.server.port}") String port) {
+        return String.format("Requisição bem sucedida pela instância executando na porta %s", port);
     }
 
     @PostMapping
